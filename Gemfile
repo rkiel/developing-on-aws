@@ -46,3 +46,4 @@ end
 gem 'therubyracer', platforms: :ruby
 gem 'pg'
 gem 'unicorn'
+gem 'aws-sdk'
