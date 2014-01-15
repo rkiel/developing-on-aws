@@ -1,8 +1,9 @@
 class BucketsController < ApplicationController
 
+  before_action :lookup
+
   def index
-    s3 = AWS::S3.new(region: "us-east-1")
-    @buckets = s3.buckets
+    @buckets = @s3.buckets
   end
 
   def new
@@ -13,9 +14,24 @@ class BucketsController < ApplicationController
     bucket = params[:bucket]
     name   = bucket[:name]
     logger.error "name is #{name}"
-    s3 = AWS::S3.new(region: "us-east-1")
-      bucket = s3.buckets.create(name)
+    bucket = @s3.buckets[name]
+    unless bucket.exists?
+      bucket = @s3.buckets.create(name)
       logger.error "bucket created"
+    end
     redirect_to action: :index
   end
+
+  def destroy
+    bucket = @s3.buckets[params[:id]]
+    bucket.delete
+    redirect_to action: :index
+  end
+
+private
+
+  def lookup
+    @s3 = AWS::S3.new(region: "us-east-1")
+  end
+
 end

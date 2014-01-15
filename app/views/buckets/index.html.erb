@@ -2,6 +2,6 @@
 
 <ul>
 <% @buckets.each do |bucket| %>
-  <li><%= bucket.name %></li>
+  <li><%= link_to bucket.name, bucket_path(bucket.name), method: :delete %></li>
 <% end %>
 </ul>
