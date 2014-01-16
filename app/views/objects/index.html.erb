@@ -1,4 +1,6 @@
-<h2><%= @bucket.name %> Objects</h2>
+<h2>
+  <%= link_to @bucket.name, "https://#{@bucket.name}.s3.amazonaws.com", target: "_blank" %> Objects
+</h2>
 
 <%= link_to "Back", buckets_path %>
 
@@ -6,7 +8,7 @@
 <% @objects.each do |object| %>
   <li>
   (<%= link_to "Delete", bucket_object_path(@bucket.name,object.key), method: :delete %>)
-  <%= object.key %>
+  <%= link_to object.key, "https://#{@bucket.name}.s3.amazonaws.com/#{object.key}", target: "_blank" %>
   </li>
 <% end %>
 </ul>
