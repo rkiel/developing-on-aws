@@ -1,7 +1,12 @@
-<%= link_to "new", new_bucket_path %>
+<h2>Buckets</h2>
+
+<%= link_to "New", new_bucket_path %>
 
 <ul>
 <% @buckets.each do |bucket| %>
-  <li><%= link_to bucket.name, bucket_path(bucket.name), method: :delete %></li>
+  <li>
+  (<%= link_to "Delete", bucket_path(bucket.name), method: :delete %>)
+  <%= link_to bucket.name, bucket_objects_path(bucket.name) %>
+  </li>
 <% end %>
 </ul>

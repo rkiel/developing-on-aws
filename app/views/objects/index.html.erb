@@ -1,0 +1,12 @@
+<h2><%= @bucket.name %> Objects</h2>
+
+<%= link_to "Back", buckets_path %>
+
+<ul>
+<% @objects.each do |object| %>
+  <li>
+  (<%= link_to "Delete", bucket_object_path(@bucket.name,object.key), method: :delete %>)
+  <%= object.key %>
+  </li>
+<% end %>
+</ul>

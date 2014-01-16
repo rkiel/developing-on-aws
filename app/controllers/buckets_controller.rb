@@ -14,10 +14,15 @@ class BucketsController < ApplicationController
     bucket = params[:bucket]
     name   = bucket[:name]
     logger.error "name is #{name}"
-    bucket = @s3.buckets[name]
-    unless bucket.exists?
-      bucket = @s3.buckets.create(name)
-      logger.error "bucket created"
+    if name.blank?
+      flash[:error] = "Name is missing"
+    else
+      bucket = @s3.buckets[name]
+      if bucket.exists?
+        flash[:error] = "#{name} is already a bucket"
+      else
+        bucket = @s3.buckets.create(name)
+      end
     end
     redirect_to action: :index
   end
