@@ -1,0 +1,18 @@
+
+<h2>Queues</h2>
+
+<%= link_to "New", new_message_queue_path %>
+
+<ul>
+<% @queues.each do |queue| %>
+  <% if queue.exists? %>
+  <li>
+  (<%= link_to "Delete", message_queue_path(queue_name(queue.arn)), method: :delete %>)
+  <%= queue_name(queue.arn) %>
+  (<%= queue.approximate_number_of_messages %>)
+  <%= link_to "Send", queue_client_path(queue_name(queue.arn)) %>
+  <%= link_to "Receive", queue_worker_path(queue_name(queue.arn)) %>
+  </li>
+  <% end %>
+<% end %>
+</ul>

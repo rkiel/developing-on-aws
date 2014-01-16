@@ -1,4 +1,8 @@
 AwsOnRails::Application.routes.draw do
+  resources :queue_workers
+  resources :queue_clients
+  resources :message_queues
+
   resources :buckets do
     resources :objects
   end

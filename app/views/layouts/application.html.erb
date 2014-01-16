@@ -10,7 +10,7 @@
 
   <h1>AWS on Rails</h1>
 
-  <p><strong><%= flash[:error] %></strong></p>
+  <p><strong><%= flash[:error] || flash[:notice] %></strong></p>
 
   <%= yield %>
 
